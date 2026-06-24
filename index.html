@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandhan Travels — Homestays</title>
+  <meta name="description" content="Bandhan Travels — two warm, handpicked homestays for your perfect getaway." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="#top" class="logo">Bandhan&nbsp;Travels</a>
+    <nav class="nav-links">
+      <a href="#resorts">Resorts</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Title card / hero -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Homestays · Retreats</p>
+      <h1 class="hero-title">Bandhan Travels</h1>
+      <p class="hero-location">West Bengal, India</p>
+      <a href="#contact" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- Resorts -->
+  <main id="resorts">
+
+    <!-- Resort 1 — left aligned -->
+    <section class="resort resort--left">
+      <div class="resort-media">
+        <img src="images/homestay-1.svg" alt="Bandhan Hill View Homestay" loading="lazy" />
+      </div>
+      <div class="resort-body">
+        <p class="resort-eyebrow">Homestay 01</p>
+        <h2 class="resort-name">Hill View Homestay</h2>
+        <p class="resort-location">Kalimpong, West Bengal</p>
+        <p class="resort-address">Upper Cart Road, Near Deolo Hill,<br />Kalimpong — 734301, West Bengal, India</p>
+        <div class="map">
+          <iframe
+            title="Map to Hill View Homestay"
+            src="https://maps.google.com/maps?q=Kalimpong%2C%20West%20Bengal&z=13&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resort 2 — right aligned -->
+    <section class="resort resort--right">
+      <div class="resort-media">
+        <img src="images/homestay-2.svg" alt="Bandhan Riverside Homestay" loading="lazy" />
+      </div>
+      <div class="resort-body">
+        <p class="resort-eyebrow">Homestay 02</p>
+        <h2 class="resort-name">Riverside Homestay</h2>
+        <p class="resort-location">Mongpong, West Bengal</p>
+        <p class="resort-address">Forest Side Road, Near Teesta River,<br />Mongpong — 735301, West Bengal, India</p>
+        <div class="map">
+          <iframe
+            title="Map to Riverside Homestay"
+            src="https://maps.google.com/maps?q=Mongpong%2C%20West%20Bengal&z=13&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <p class="section-eyebrow">Get in touch</p>
+      <h2 class="contact-title">Contact Us</h2>
+      <ul class="contact-details">
+        <li>
+          <span class="contact-label">Name</span>
+          <span class="contact-value">Bandhan Travels</span>
+        </li>
+        <li>
+          <span class="contact-label">Phone</span>
+          <a class="contact-value" href="tel:+919800000000">+91 98000 00000</a>
+        </li>
+        <li>
+          <span class="contact-label">Email</span>
+          <a class="contact-value" href="mailto:hello@bandhantravels.com">hello@bandhantravels.com</a>
+        </li>
+      </ul>
+      <a class="btn btn-whatsapp" href="https://wa.me/919800000000" target="_blank" rel="noopener">
+        WhatsApp Us
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-logo">Bandhan Travels</span>
+    <span class="footer-copy">© <span id="year"></span> Bandhan Travels. All rights reserved.</span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
