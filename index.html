@@ -9,12 +9,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/icon.png" type="image/png" />
 </head>
 <body>
 
   <!-- Navbar -->
   <header class="navbar">
-    <a href="#top" class="logo">Bandhan&nbsp;Trails</a>
+    <a href="#top" class="logo">
+      <img src="images/logo.png" alt="Bandhan Trails" class="logo-img" />
+    </a>
     <nav class="nav-links">
       <a href="#resorts">Resorts</a>
       <a href="#contact">Contact</a>
@@ -37,7 +40,19 @@
     <!-- Resort 1 — left aligned -->
     <section class="resort resort--left">
       <div class="resort-media">
-        <img src="images/cloud-nest-room-1.jpeg" alt="Cloud Nest Homestay — mountain view" loading="lazy" />
+        <div class="slideshow">
+          <div class="slides">
+            <img class="slide" src="images/cloud-nest-room-1.jpeg" alt="Cloud Nest room" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-exterior.jpeg" alt="Cloud Nest exterior" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-garden.jpeg" alt="Cloud Nest garden" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-room-2.jpeg" alt="Cloud Nest room 2" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-tea-view.jpeg" alt="Cloud Nest tea view" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-trail.jpeg" alt="Forest trail near Cloud Nest" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-valley-view.jpeg" alt="Valley view from Cloud Nest" loading="lazy" />
+            <img class="slide" src="images/cloud-nest-night.jpeg" alt="Cloud Nest garden lit up at night" loading="lazy" />
+          </div>
+          <div class="dots"></div>
+        </div>
       </div>
       <div class="resort-body">
         <p class="resort-eyebrow">Homestay 01</p>
@@ -62,16 +77,17 @@
       </div>
       <div class="resort-body">
         <p class="resort-eyebrow">Homestay 02</p>
-        <h2 class="resort-name">Griham <span class="coming-soon">Coming Soon</span></h2>
+        <h2 class="resort-name">Griham</h2>
         <p class="resort-location">Sittong-2, Kurseong, West Bengal</p>
         <!-- <p class="resort-address">Forest Side Road, Near Teesta River,<br />Mongpong — 734008, West Bengal, India</p> -->
-        <div class="map">
+        <div class="map map--coming-soon">
           <iframe
             title="Map to Riverside Homestay"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d688.9833553903909!2d88.36061331675194!3d26.870950884288398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e4390006a31699%3A0xc72051e86fefb723!2sSittong-2!5e0!3m2!1sen!2sin!4v1782631356025!5m2!1sen!2sin"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen></iframe>
+          <div class="map-overlay">Coming Soon</div>
         </div>
       </div>
     </section>
@@ -107,7 +123,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <span class="footer-logo">Bandhan Trails</span>
+    <img src="images/logo.png" alt="Bandhan Trails" class="footer-logo" />
     <div class="footer-meta">
       <span class="footer-address">Flat-15 Shivam Apartment, 9/1 Feeder Road, Kolkata — 700056</span>
       <span class="footer-trade">Trade Licence No. 0917P2160926452372</span>
@@ -117,6 +133,50 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const track = document.querySelector('.slideshow .slides');
+      if (!track) return;
+      const total = track.querySelectorAll('.slide').length;
+      const dotsWrap = document.querySelector('.slideshow .dots');
+
+      // clone first slide for a seamless loop
+      const clone = track.firstElementChild.cloneNode(true);
+      track.appendChild(clone);
+
+      // build dots (one per real slide)
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+        dot.addEventListener('click', () => { stop(); go(i); start(); });
+        dotsWrap.appendChild(dot);
+      }
+      const dots = dotsWrap.querySelectorAll('.dot');
+
+      let index = 0;
+      function go(i) {
+        index = i;
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        const active = index % total;
+        dots.forEach((d, di) => d.classList.toggle('active', di === active));
+      }
+
+      track.addEventListener('transitionend', () => {
+        if (index === total) {              // reached the clone -> snap to real first
+          track.style.transition = 'none';
+          track.style.transform = 'translateX(0)';
+          void track.offsetWidth;           // force reflow
+          track.style.transition = '';      // restore CSS transition
+          index = 0;
+        }
+      });
+
+      let timer;
+      function start() { timer = setInterval(() => go(index + 1), 4000); }
+      function stop() { clearInterval(timer); }
+      start();
+    })();
   </script>
 </body>
 </html>
