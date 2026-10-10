@@ -42,16 +42,16 @@
       <div class="resort-media">
         <div class="slideshow">
           <div class="slides">
-            <img class="slide" src="images/cloud-nest-room-1.jpeg" alt="Cloud Nest room" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-exterior.jpeg" alt="Cloud Nest exterior" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-garden.jpeg" alt="Cloud Nest garden" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-room-2.jpeg" alt="Cloud Nest room 2" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-tea-view.jpeg" alt="Cloud Nest tea view" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-trail.jpeg" alt="Forest trail near Cloud Nest" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-valley-view.jpeg" alt="Valley view from Cloud Nest" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-night.jpeg" alt="Cloud Nest garden lit up at night" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-mountain-view.jpeg" alt="Cloud Nest with mountain views" loading="lazy" />
-            <img class="slide" src="images/cloud-nest-waterfall.jpeg" alt="Waterfall near Cloud Nest" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-room-1.jpeg" alt="Cloud Nest room" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-exterior.jpeg" alt="Cloud Nest exterior" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-garden.jpeg" alt="Cloud Nest garden" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-room-2.jpeg" alt="Cloud Nest room 2" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-tea-view.jpeg" alt="Cloud Nest tea view" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-trail.jpeg" alt="Forest trail near Cloud Nest" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-valley-view.jpeg" alt="Valley view from Cloud Nest" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-night.jpeg" alt="Cloud Nest garden lit up at night" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-mountain-view.jpeg" alt="Cloud Nest with mountain views" loading="lazy" />
+            <img class="slide" src="images/cloudnest/cloud-nest-waterfall.jpeg" alt="Waterfall near Cloud Nest" loading="lazy" />
           </div>
           <div class="dots"></div>
         </div>
@@ -75,7 +75,17 @@
     <!-- Resort 2 — right aligned -->
     <section class="resort resort--right">
       <div class="resort-media">
-        <img src="images/griham-logo.jpeg" alt="Griham Homestay — Sittong" loading="lazy" />
+        <div class="slideshow">
+          <div class="slides">
+            <img class="slide" src="images/sittong/sittong-1.jpeg" alt="Griham Homestay, Sittong — photo 1" loading="lazy" />
+            <img class="slide" src="images/sittong/sittong-2.jpeg" alt="Griham Homestay, Sittong — photo 2" loading="lazy" />
+            <img class="slide" src="images/sittong/sittong-3.jpeg" alt="Griham Homestay, Sittong — photo 3" loading="lazy" />
+            <img class="slide" src="images/sittong/sittong-4.jpeg" alt="Griham Homestay, Sittong — photo 4" loading="lazy" />
+            <img class="slide" src="images/sittong/sittong-5.jpeg" alt="Griham Homestay, Sittong — photo 5" loading="lazy" />
+            <img class="slide" src="images/sittong/sittong-6.jpeg" alt="Griham Homestay, Sittong — photo 6" loading="lazy" />
+          </div>
+          <div class="dots"></div>
+        </div>
       </div>
       <div class="resort-body">
         <p class="resort-eyebrow">Homestay 02</p>
@@ -146,11 +156,11 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (function () {
-      const track = document.querySelector('.slideshow .slides');
+    document.querySelectorAll('.slideshow').forEach(function (show) {
+      const track = show.querySelector('.slides');
       if (!track) return;
       const total = track.querySelectorAll('.slide').length;
-      const dotsWrap = document.querySelector('.slideshow .dots');
+      const dotsWrap = show.querySelector('.dots');
 
       // clone first slide for a seamless loop
       const clone = track.firstElementChild.cloneNode(true);
@@ -189,7 +199,7 @@
       function start() { timer = setInterval(() => go(index + 1), 4000); }
       function stop() { clearInterval(timer); }
       start();
-    })();
+    });
   </script>
 </body>
 </html>
