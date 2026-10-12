@@ -172,7 +172,7 @@
         dot.type = 'button';
         dot.className = 'dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
-        dot.addEventListener('click', () => { stop(); go(i); start(); });
+        dot.addEventListener('click', () => { go(i); pauseAuto(); });
         dotsWrap.appendChild(dot);
       }
       const dots = dotsWrap.querySelectorAll('.dot');
@@ -195,9 +195,37 @@
         }
       });
 
-      let timer;
-      function start() { timer = setInterval(() => go(index + 1), 4000); }
-      function stop() { clearInterval(timer); }
+      function next() { if (index < total) go(index + 1); }   // ignore while snapping back from the clone
+      function prev() {
+        if (index === 0) {                  // jump to the clone (looks like slide 0), then slide back
+          track.style.transition = 'none';
+          track.style.transform = 'translateX(-' + (total * 100) + '%)';
+          void track.offsetWidth;
+          track.style.transition = '';
+          index = total;
+        }
+        go(index - 1);
+      }
+
+      // arrows
+      [['prev', '‹', 'Previous photo', prev], ['next', '›', 'Next photo', next]].forEach(a => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'arrow arrow--' + a[0];
+        b.textContent = a[1];
+        b.setAttribute('aria-label', a[2]);
+        b.addEventListener('click', () => { a[3](); pauseAuto(); });
+        show.appendChild(b);
+      });
+
+      // autoscroll; manual use pauses it, resumes after 7s without a click
+      let timer, resume;
+      function start() { clearInterval(timer); timer = setInterval(next, 4000); }
+      function pauseAuto() {
+        clearInterval(timer);
+        clearTimeout(resume);
+        resume = setTimeout(start, 7000);
+      }
       start();
     });
   </script>
